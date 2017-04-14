@@ -37,19 +37,3 @@ target "EarlGreyExampleSwiftTests" do
   pod 'EarlGrey', :podspec => `pwd`.strip + '/EarlGrey.podspec'
 end
 
-post_install do |installer|
-  # Always install the newest EarlGrey gem
-  require 'rubygems/command_manager'
-  Gem::CommandManager.instance[:install].install_gem('earlgrey', Gem::Requirement.default)
-  require 'earlgrey'
-
-  # For each test target, you need to call the EarlGrey script's edit method once.
-  TARGETS.each do |test_target|
-    var_args = {}
-    if test_target.include? "Swift"
-      var_args = {swift: true}
-    end
-    configure_for_earlgrey(installer, PROJECT_NAME, test_target, test_target + '.xcscheme', var_args)
-  end
-end
-
