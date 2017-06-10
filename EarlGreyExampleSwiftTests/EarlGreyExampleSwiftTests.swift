@@ -16,6 +16,7 @@
 
 import EarlGrey
 import XCTest
+
 @testable import EarlGreyExampleSwift
 
 class EarlGreyExampleSwiftTests: XCTestCase {
@@ -49,18 +50,18 @@ class EarlGreyExampleSwiftTests: XCTestCase {
     // This test will fail because both buttons are visible and match the selection.
     // We add a custom error here to prevent the Test Suite failing.
     var error: NSError?
-    EarlGrey.select(elementWithMatcher: grey_sufficientlyVisible())
+    EarlGrey.select(elementWithMatcher: grey_text("Non-Existent Element Text"))
       .perform(grey_tap(), error: &error)
 
     if let _ = error {
-      print("Test Failed with Error : \(error?.description)")
+      print("Test Failed with Error : \(error.self!)")
     }
   }
 
   func testCollectionMatchers() {
     // First way to disambiguate: use collection matchers.
     let visibleSendButtonMatcher: GREYMatcher! =
-        grey_allOfMatchers([grey_accessibilityID("ClickMe"), grey_sufficientlyVisible()])
+        grey_allOf([grey_accessibilityID("ClickMe"), grey_sufficientlyVisible()])
     EarlGrey.select(elementWithMatcher: visibleSendButtonMatcher)
       .perform(grey_doubleTap())
   }
@@ -248,6 +249,6 @@ class SampleFailureHandler : NSObject, GREYFailureHandler {
    *  @param details   Extra information about the failure.
    */
   public func handle(_ exception: GREYFrameworkException!, details: String!) {
-    print("Test Failed With Reason : \(exception.reason) and details \(details)")
+    print("Test Failed With Reason : \(exception.reason!) and details \(details)")
   }
 }

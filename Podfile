@@ -18,22 +18,19 @@ platform :ios, '8.0'
 
 source 'https://github.com/CocoaPods/Specs.git'
 
-PROJECT_NAME = 'EarlGreyExample'
-TARGETS = %w[EarlGreyExampleTests EarlGreyExampleSwiftTests]
-
 use_frameworks!
 
 target "EarlGreyExampleTests" do
   project 'EarlGreyExample'
 
   inherit! :search_paths
-  pod 'EarlGrey', :podspec => `pwd`.strip + '/EarlGrey.podspec'
+  pod 'EarlGrey'
 end
 
 target "EarlGreyExampleSwiftTests" do
   project 'EarlGreyExample'
 
   inherit! :search_paths
-  pod 'EarlGrey', :podspec => `pwd`.strip + '/EarlGrey.podspec'
+  pod 'EarlGrey'
 end
 

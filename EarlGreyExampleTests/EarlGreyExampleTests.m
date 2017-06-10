@@ -68,7 +68,7 @@
   [[EarlGrey selectElementWithMatcher:grey_sufficientlyVisible()]
       performAction:grey_tap() error:&error];
   if (error) {
-    NSLog(@"Test Failed with Error : %@",[error description]);
+    NSLog(@"Test Failed with Error : %@", [error description]);
   }
 }
 
@@ -83,7 +83,8 @@
   // Second way to disambiguate: use inRoot to focus on a specific window or container.
   // There are two buttons with accessibility id "Send", but only one is inside SendMessageView.
   [[[EarlGrey selectElementWithMatcher:grey_accessibilityID(@"Send")]
-      inRoot:grey_kindOfClass([SendMessageView class])] performAction:grey_doubleTap()];
+      inRoot:grey_kindOfClass([SendMessageView class])]
+      performAction:grey_doubleTap()];
 }
 
 // Define a custom matcher for table cells that contains a date for a Thursday.
@@ -93,11 +94,14 @@
       NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
       formatter.dateStyle = NSDateFormatterLongStyle;
       NSDate *date = [formatter dateFromString:[[(UITableViewCell *)cell textLabel] text]];
+      if (!date) {
+        return NO;
+      }
       NSCalendar *calendar = [NSCalendar currentCalendar];
       NSInteger weekday = [calendar component:NSCalendarUnitWeekday fromDate:date];
       return weekday == 5;
     } else {
-      return false;
+      return NO;
     }
   };
   DescribeToBlock describe = ^void(id<GREYDescription> description) {
