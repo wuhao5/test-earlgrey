@@ -14,11 +14,12 @@
 #
 language: objective-c
 sudo: false
-osx_image: xcode8.2
+osx_image: xcode9
 before_script:
   - pod install
 script:
   - xcodebuild -workspace EarlGreyExample.xcworkspace/  -scheme EarlGreyExampleTests -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 6,OS=9.1" test
+  - xcodebuild -workspace EarlGreyExample.xcworkspace/  -scheme EarlGreyExampleTests -sdk iphonesimulator -destination "platform=iOS Simulator,name=iPhone 5,OS=9.1" test
 branches:
   only:
     - master
