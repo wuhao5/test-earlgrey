@@ -24,13 +24,13 @@ target "EarlGreyExampleTests" do
   project 'EarlGreyExample'
 
   inherit! :search_paths
-  pod 'EarlGrey'
+  pod 'EarlGrey', :podspec => `pwd`.strip + '/EarlGrey.podspec'
 end
 
 target "EarlGreyExampleSwiftTests" do
   project 'EarlGreyExample'
 
   inherit! :search_paths
-  pod 'EarlGrey'
+  pod 'EarlGrey', :podspec => `pwd`.strip + '/EarlGrey.podspec'
 end
 
